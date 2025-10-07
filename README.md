@@ -34,6 +34,26 @@ memory-bank/
 ```
 
 #### 2. Set Up Cursor Rules
+
+##### Option A: Use the Cursor Rules CLI Tool
+For an interactive setup with pre-built rule templates, use the `@mrzacsmith/cursor-rules` package:
+
+```bash
+# Run with npx (recommended)
+npx @mrzacsmith/cursor-rules
+
+# Or install globally
+npm install -g @mrzacsmith/cursor-rules
+cursor-rules
+```
+
+This CLI tool provides:
+- **Interactive Rule Selection**: Navigate through categories and select rules
+- **Organized Categories**: Code Style, Frontend, Backend, Database, Mobile, Desktop & Extension Development
+- **Safe Installation**: Ensures existing rules aren't overwritten without permission
+- **Comprehensive Rules**: Includes Tailwind, React, Next.js, Python, Flutter, and more
+
+##### Option B: Manual Setup
 Create a `.cursorrules` file in your project root:
 
 ```markdown
@@ -226,6 +246,16 @@ Contributions to memory bank implementations are welcome! Please:
 2. Create a feature branch
 3. Make your changes
 4. Submit a pull request
+
+## Additional Resources
+
+### Cursor Rules Management
+- **[@mrzacsmith/cursor-rules](https://www.npmjs.com/package/@mrzacsmith/cursor-rules)**: Interactive CLI tool for managing Cursor rules with pre-built templates
+- **Cursor Documentation**: Official Cursor IDE documentation and community forums
+
+### Windsurf Memory Plugins
+- **[Cascade Memory Bank](https://github.com/GreatScottyMac/cascade-memory-bank)**: Feature-rich memory bank implementation
+- **[Windsurf Memory Plugin](https://github.com/Blu3Ru1n/windsurf-memory-plugin)**: Alternative SQLite-based memory solution
 
 ## Support
 
