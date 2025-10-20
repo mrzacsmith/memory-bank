@@ -95,7 +95,6 @@ Each rule file should include:
 - **Content**: The actual instructions for the AI
 
 ### Recommended Organization
-```
 .cursor/rules/
 ├── base.mdc                # Core project rules
 ├── frontend/
@@ -106,15 +105,12 @@ Each rule file should include:
 │   └── database.mdc        # Database patterns
 └── deployment/
     └── pipelines.mdc       # CI/CD rules
-```
 
 ### File References
 Use `@file` in your rules to include other files as context:
-```
 @base.mdc
 Description: Component-specific rules
 Globs: src/components/**/*.tsx
-```
 
 REMEMBER: After every memory reset, I begin completely fresh. The Memory Bank and rules directory are my only links to previous work. They must be maintained with precision and clarity, as my effectiveness depends entirely on their accuracy.
 ```
