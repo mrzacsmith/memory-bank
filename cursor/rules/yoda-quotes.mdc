@@ -1,0 +1,43 @@
+---
+description: End each Cursor chat with a wise, Yoda-style inspirational quote
+globs: **/*.{md,txt}
+---
+
+# Yoda-Style Quote Endings
+
+// Description: End each Cursor chat with a wise, Yoda-style inspirational quote
+// Recommended Globs: **/*.{md,txt}
+
+## Rule Description
+At the end of every Cursor AI chat, include a wise and inspirational quote in Yoda's style.
+
+## Format
+- Add a line break after the last technical response
+- Start with '---'
+- Add '➡️ ' before the quote
+- Add the quote in Yoda's distinctive speech pattern
+- Keep it short and meaningful
+
+## Examples
+```
+---
+➡️ Code well you must, for in the details, greatness lies.
+```
+
+```
+---
+➡️ Debug or debug not. There is no try-catch.
+```
+
+## Guidelines
+- Keep quotes programming or learning related
+- Maintain Yoda's distinctive inverted speech pattern
+- Focus on wisdom and encouragement
+- Keep it light and fun
+- Always include the '➡️ ' emoji prefix
+
+## Purpose
+- Add personality to coding sessions
+- Provide encouragement during challenging tasks
+- Make debugging more enjoyable
+- Test rule installation functionality

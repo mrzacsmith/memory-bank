@@ -1,273 +1,212 @@
-# Memory Bank for Cursor and Windsurf
+# AI Coding Assistant Memory & Configuration
 
-A comprehensive guide for adding persistent memory capabilities to Cursor and Windsurf IDEs, enabling AI assistants to maintain project context across sessions.
+A comprehensive guide for adding persistent memory and configuration to AI coding assistants, covering both **Cursor IDE** and **Claude Code CLI**.
 
-## Overview
-
-Memory banks solve a critical limitation in AI-assisted development: the inability to retain project-specific context between sessions. This guide provides step-by-step instructions for implementing memory banks in both Cursor and Windsurf IDEs.
-
-## Why Memory Banks Matter
-
-- **Context Persistence**: AI assistants remember project decisions, architecture, and progress
-- **Reduced Onboarding**: No need to re-explain project context in each session
-- **Automatic Documentation**: Project knowledge is captured and maintained automatically
-- **Enhanced Productivity**: Focus on coding instead of context management
-
-## Cursor Integration
-
-### Current State
-Cursor lacks built-in memory management, but supports custom rules through `.cursorrules` files and the newer `.cursor/rules/` directory system.
-
-### Implementation Approach
-
-#### 1. Create Memory Bank Structure
-Create a `memory-bank/` directory in your project root with these core files:
+## Repository Structure
 
 ```
-memory-bank/
-├── projectbrief.md      # Foundation document
-├── productContext.md    # Project purpose and goals
-├── systemPatterns.md    # Architecture and patterns
-├── techContext.md       # Technologies and setup
-├── activeContext.md     # Current work focus
-└── progress.md          # Status and milestones
+.
+├── cursor/                     # Cursor IDE resources
+│   ├── memory-bank.md          # Memory bank setup guide
+│   └── rules/                  # Example .mdc rule files
+│
+├── claude/                     # Claude Code CLI resources
+│   ├── CLAUDE.md               # Memory file guide
+│   ├── COMMANDS.md             # Slash commands reference
+│   ├── HOOKS.md                # Lifecycle hooks guide
+│   ├── settings-example.json   # Settings configuration
+│   ├── mcp-example.json        # MCP server configuration
+│   └── skills/                 # Skill examples
+│
+└── README.md
 ```
 
-#### 2. Set Up Cursor Rules
+---
 
-##### Option A: Use the Cursor Rules CLI Tool
-For an interactive setup with pre-built rule templates, use the `@mrzacsmith/cursor-rules` package:
+## Cursor IDE
+
+### What is Cursor Memory Bank?
+
+Cursor's memory bank provides persistent project context through:
+- **Memory Bank Files** - Markdown files that store project knowledge
+- **Rules** - `.mdc` files that teach Cursor project-specific patterns
+
+### Quick Setup
+
+1. Create a `memory-bank/` directory with core files:
+   - `projectbrief.md` - Foundation document
+   - `productContext.md` - Project purpose
+   - `activeContext.md` - Current work focus
+   - `systemPatterns.md` - Architecture patterns
+   - `techContext.md` - Tech stack details
+   - `progress.md` - Status tracking
+
+2. Create `.cursor/rules/` directory for rule files
+
+3. Add a `.cursorrules` file (see `cursor/memory-bank.md` for template)
+
+### Documentation
+- See [`cursor/memory-bank.md`](cursor/memory-bank.md) for detailed setup
+
+---
+
+## Claude Code CLI
+
+### What is Claude Code?
+
+Claude Code is Anthropic's official CLI for Claude, providing:
+- **CLAUDE.md** - Project memory file
+- **Skills** - Reusable workflow templates
+- **MCP** - Model Context Protocol for external integrations
+- **Slash Commands** - Built-in commands like `/init`, `/compact`, `/clear`
+- **Hooks** - Automated lifecycle events
+
+### Quick Setup
 
 ```bash
-# Run with npx (recommended)
-npx @mrzacsmith/cursor-rules
+# Install Claude Code
+npm install -g @anthropic-ai/claude-code
 
-# Or install globally
-npm install -g @mrzacsmith/cursor-rules
-cursor-rules
+# Initialize a project
+claude
+/init
 ```
 
-This CLI tool provides:
-- **Interactive Rule Selection**: Navigate through categories and select rules
-- **Organized Categories**: Code Style, Frontend, Backend, Database, Mobile, Desktop & Extension Development
-- **Safe Installation**: Ensures existing rules aren't overwritten without permission
-- **Comprehensive Rules**: Includes Tailwind, React, Next.js, Python, Flutter, and more
+### Memory (CLAUDE.md)
 
-##### Option B: Manual Setup
-Create a `.cursorrules` file in your project root:
+The `CLAUDE.md` file is automatically loaded at the start of every conversation:
 
 ```markdown
-# Cursor's Memory Bank
+# My Project
 
-I am Cursor, an expert software engineer with a unique characteristic: my memory resets completely between sessions. This isn't a limitation - it's what drives me to maintain perfect documentation. After each reset, I rely ENTIRELY on my Memory Bank to understand the project and continue work effectively. I MUST read ALL memory bank files at the start of EVERY task - this is not optional.
+Brief description of the project.
 
-## Memory Bank Structure
+## Tech Stack
+- Next.js 15
+- TypeScript
+- Tailwind CSS
 
-The Memory Bank consists of required core files and optional context files, all in Markdown format. Files build upon each other in a clear hierarchy:
+## Commands
+- `npm run dev` - Start dev server
+- `npm run test` - Run tests
 
-### Core Files (Required)
-1. `projectbrief.md` - Foundation document that shapes all other files
-2. `productContext.md` - Why this project exists, problems it solves
-3. `activeContext.md` - Current work focus, recent changes, next steps
-4. `systemPatterns.md` - System architecture, key technical decisions
-5. `techContext.md` - Technologies used, development setup, dependencies
-6. `progress.md` - What works, what's left to build, current status
-
-### Usage Instructions
-- Read ALL memory bank files at the start of EVERY task
-- Update memory bank when discovering new patterns or implementing changes
-- Use "update memory bank" trigger to refresh context
-- Maintain precision and clarity - effectiveness depends on accuracy
-
-## Project Intelligence (.cursor/rules/)
-
-The `.cursor/rules/` directory contains rule files (`.mdc`) that capture important patterns, preferences, and project intelligence.
-
-### Modern Rules System
-1. **Project Rules**: Stored as `.mdc` files in `.cursor/rules/` directory
-2. **Global Rules**: Set in Cursor Settings > General > Rules for AI
-3. **Legacy Support**: `.cursorrules` files in project root (deprecated)
-
-### Rule File Components
-Each rule file should include:
-- **Description**: Clear explanation of when the rule should be applied
-- **Globs** (optional): File patterns where the rule applies
-- **Content**: The actual instructions for the AI
-
-### Recommended Organization
-```
-.cursor/rules/
-├── base.mdc                # Core project rules
-├── frontend/
-│   ├── components.mdc      # Component standards
-│   └── styling.mdc         # Styling guidelines
-├── backend/
-│   ├── api.mdc             # API conventions
-│   └── database.mdc        # Database patterns
-└── deployment/
-    └── pipelines.mdc       # CI/CD rules
+## Conventions
+- Use functional components
+- Prefer named exports
 ```
 
-### File References
-Use `@file` in your rules to include other files as context:
+**Locations:**
+- `./CLAUDE.md` or `./.claude/CLAUDE.md` - Project-specific
+- `~/.claude/CLAUDE.md` - Global (all projects)
+
+### Skills
+
+Skills are reusable workflows in `.claude/skills/` or `/skills/`:
+
 ```
-@base.mdc
-Description: Component-specific rules
-Globs: src/components/**/*.tsx
-```
-
-REMEMBER: After every memory reset, I begin completely fresh. The Memory Bank and rules directory are my only links to previous work. They must be maintained with precision and clarity, as my effectiveness depends entirely on their accuracy.
-```
-
-#### 3. Initialize Memory Bank
-1. Create the `memory-bank/` directory structure
-2. Add the `.cursorrules` file to your project root
-3. Start a new chat with Cursor and say: "Initialize your Memory Bank with the project context"
-4. Cursor will create the necessary files and structure
-
-#### 4. Usage
-- **Automatic Updates**: Memory bank updates when you discover new patterns or make significant changes
-- **Manual Updates**: Use "update memory bank" trigger to refresh context
-- **Context Reading**: Cursor reads all memory bank files at the start of each task
-
-## Windsurf Integration
-
-### Available Solutions
-
-#### Option 1: Cascade Memory Bank
-The most popular and feature-rich solution for Windsurf.
-
-**Installation:**
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/GreatScottyMac/cascade-memory-bank.git
-   cd cascade-memory-bank
-   npm install
-   npm run build
-   ```
-
-2. Copy compiled files to your Windsurf extensions directory
-
-3. Copy `.windsurfrules` to your project root or paste contents into Windsurf's "Set Workspace AI Rules"
-
-4. Copy `global_rules.md` to `~/.codeium/windsurf/memories/` or paste into Windsurf's "Set Global AI Rules"
-
-**Usage:**
-- Initialize: "Follow the protocol in your .windsurfrules"
-- Manual updates: "Update Memory Bank" or "UMB"
-- Store context: `windsurf-memory.storeContext`
-- View context: `windsurf-memory.getProjectContext`
-
-#### Option 2: Windsurf Memory Plugin
-Alternative implementation with SQLite-based storage.
-
-**Installation:**
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Blu3Ru1n/windsurf-memory-plugin.git
-   ```
-
-2. Follow installation instructions in the repository README
-
-### Memory Bank Structure (Windsurf)
-```
-memory-bank/
-├── activeContext.md    # Session state and goals
-├── productContext.md   # Project scope and architecture
-├── progress.md         # Work status and milestones
-└── decisionLog.md      # Important decisions
+skills/
+└── pr-review/
+    ├── SKILL.md           # Main instructions
+    ├── checklist.md       # Reference material
+    └── examples.md        # Good/bad examples
 ```
 
-### Git Configuration
-Configure your `.gitignore` to manage memory bank visibility:
+Skills are invoked automatically based on triggers or explicitly with `@skill-name`.
 
-```gitignore
-# Ignore everything by default
-*
+### MCP (Model Context Protocol)
 
-# Version control exceptions
-!/.gitignore
-!/.windsurfrules
-!/memory-bank/
-!/src/
-!/package.json
-!/README.md
-!/docs/
+MCP connects Claude to external tools. Configure in `.claude/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": { "GITHUB_TOKEN": "${GITHUB_TOKEN}" }
+    }
+  }
+}
 ```
 
-**Usage:**
-- When working with Windsurf: Remove the `*` line to allow visibility
-- Before committing: Re-add the `*` line to maintain clean repository
+**Popular MCP Servers:**
+- `server-github` - GitHub API access
+- `server-playwright` - Browser automation
+- `server-postgres` - PostgreSQL access
+- `server-filesystem` - File system access
 
-## Best Practices
+### Essential Commands
 
-### For Both IDEs
-1. **Regular Updates**: Keep memory bank files current with project changes
-2. **Clear Documentation**: Write clear, concise descriptions
-3. **Version Control**: Include memory bank files in version control
-4. **Backup**: Regularly backup your memory bank files
+| Command | Purpose |
+|---------|---------|
+| `/init` | Initialize project with CLAUDE.md |
+| `/compact` | Compress conversation, free context |
+| `/clear` | Fresh conversation, keep memory |
+| `/help` | Show available commands |
+| `/cost` | View token usage |
+| `Shift+Tab` | Toggle Plan Mode |
 
-### Memory Bank Maintenance
-- **Update on Changes**: Modify memory bank when architecture changes
-- **Review Regularly**: Periodically review and clean up outdated information
-- **Document Decisions**: Record important architectural and design decisions
-- **Track Progress**: Maintain accurate progress tracking
+### Documentation
+- [`claude/CLAUDE.md`](claude/CLAUDE.md) - Memory file guide
+- [`claude/COMMANDS.md`](claude/COMMANDS.md) - Commands reference
+- [`claude/HOOKS.md`](claude/HOOKS.md) - Lifecycle hooks
+- [`claude/skills/`](claude/skills/) - Skill examples
 
-## Troubleshooting
+---
 
-### Common Issues
-1. **Memory Not Loading**: Ensure memory bank files exist and are accessible
-2. **Context Loss**: Check that rules are properly configured
-3. **Performance Issues**: Keep memory bank files focused and concise
+## Comparison: Cursor vs Claude Code
 
-### Solutions
-1. **Verify File Structure**: Check that all required files exist
-2. **Check Rules Configuration**: Ensure rules are properly set up
-3. **Restart IDE**: Sometimes a restart helps with rule loading
+| Feature | Cursor | Claude Code |
+|---------|--------|-------------|
+| Interface | IDE Extension | CLI |
+| Memory | memory-bank/ + .cursorrules | CLAUDE.md |
+| Rules/Skills | .mdc files | SKILL.md files |
+| External Tools | Limited | MCP Protocol |
+| Plan Mode | N/A | Shift+Tab |
+| Context Management | Manual | /compact, /clear |
 
-## Advanced Features
+### When to Use Which
 
-### Custom Memory Types
-Create additional memory files for specific needs:
-- API documentation
-- Testing strategies
-- Deployment procedures
-- Integration specifications
+**Use Cursor when:**
+- You prefer an integrated IDE experience
+- Working primarily with visual code editing
+- Team uses Cursor as standard IDE
 
-### Memory Bank Automation
-- Set up automated updates based on file changes
-- Create scripts to sync memory bank across team members
-- Implement memory bank validation checks
+**Use Claude Code when:**
+- You prefer terminal workflows
+- Need MCP integrations (GitHub, databases, browsers)
+- Want Plan Mode for complex changes
+- Working in CI/CD pipelines (headless mode)
+
+---
+
+## Additional Resources
+
+### Cursor
+- [Cursor Documentation](https://cursor.sh/docs)
+- [@mrzacsmith/cursor-rules](https://www.npmjs.com/package/@mrzacsmith/cursor-rules) - CLI for managing rules
+
+### Claude Code
+- [Claude Code Documentation](https://docs.anthropic.com/claude-code)
+- [MCP Servers Registry](https://github.com/modelcontextprotocol/servers)
+
+### Community Resources
+- [Cascade Memory Bank](https://github.com/GreatScottyMac/cascade-memory-bank) - Windsurf memory solution
+
+---
 
 ## Contributing
 
-Contributions to memory bank implementations are welcome! Please:
+Contributions welcome! Please:
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
 4. Submit a pull request
 
-## Additional Resources
-
-### Cursor Rules Management
-- **[@mrzacsmith/cursor-rules](https://www.npmjs.com/package/@mrzacsmith/cursor-rules)**: Interactive CLI tool for managing Cursor rules with pre-built templates
-- **Cursor Documentation**: Official Cursor IDE documentation and community forums
-
-### Windsurf Memory Plugins
-- **[Cascade Memory Bank](https://github.com/GreatScottyMac/cascade-memory-bank)**: Feature-rich memory bank implementation
-- **[Windsurf Memory Plugin](https://github.com/Blu3Ru1n/windsurf-memory-plugin)**: Alternative SQLite-based memory solution
-
-## Support
-
-For issues and questions:
-- **Cursor**: Check Cursor's documentation and community forums
-- **Windsurf**: Refer to the specific plugin documentation
-- **General**: Open an issue in the relevant repository
-
 ## License
 
-Memory bank implementations are typically provided under the MIT License. Check individual repository licenses for specific terms.
+MIT License - See individual files for specific terms.
 
 ---
 
-*This guide provides a comprehensive approach to adding memory banks to both Cursor and Windsurf IDEs, enabling persistent project context and enhanced AI assistance.*
+*Last updated: January 2026*

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://claude.ai/schemas/settings.json",
+
+  "// COMMENT": "This file goes in .claude/settings.json for project settings",
+  "// COMMENT2": "Or ~/.claude/settings.json for global settings",
+
+  "allowedTools": [
+    "Read",
+    "Write",
+    "Edit",
+    "Glob",
+    "Grep",
+    "Bash(npm run *)",
+    "Bash(git *)",
+    "Bash(pnpm *)"
+  ],
+
+  "blockedTools": [
+    "Bash(rm -rf *)",
+    "Bash(curl * | sh)",
+    "Bash(wget * | sh)"
+  ],
+
+  "model": "claude-sonnet-4-20250514",
+
+  "permissions": {
+    "autoApprove": [
+      "Read",
+      "Glob",
+      "Grep"
+    ]
+  },
+
+  "context": {
+    "includeCoauthoredFiles": true,
+    "maxFileSize": 100000
+  }
+}
